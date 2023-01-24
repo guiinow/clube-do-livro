@@ -1,26 +1,55 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { BookEntity } from './entities/book.entity';
 
 @Injectable()
 export class BooksService {
+  private books: BookEntity[] = [];
+
   create(createBookDto: CreateBookDto) {
-    return 'This action adds a new book';
+    const currentMaxId = this.books[this.books.length - 1]?.id || 0;
+    
+    const id = currentMaxId + 1;
+
+    const books = {
+      id,
+      ...createBookDto,
+    };
+
+    this.books.push(books);
+    return books;
   }
 
   findAll() {
-    return `This action returns all books`;
+    return this.books;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} book`;
+    const index = this.books.findIndex((book) => book.id === id);
+
+    return this.books[index];
   }
 
   update(id: number, updateBookDto: UpdateBookDto) {
-    return `This action updates a #${id} book`;
+    const book = this.findOne(id);
+    const newBook = {
+      ...book,
+      ...updateBookDto,
+    }
+    const index = this.books.findIndex((book) => book.id === id);
+
+    this.books[index] = newBook;
+
+    return newBook;
+
   }
 
   remove(id: number) {
+    const index = this.books.findIndex((book) => book.id === id);
+
+    this.books.splice(index, 1);
+    
     return `This action removes a #${id} book`;
   }
 }

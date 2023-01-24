@@ -12,30 +12,47 @@ export class AssociateService {
 
     const id = currentMaxId + 1;
 
-    const newAssociate = {
+    const associate = {
       id,
       ...createAssociateDto,
     };
 
-    this.associates.push(newAssociate);
+    this.associates.push(associate);
 
+
+    return associate;
+  }
+
+  findAll() {
+    return this.associates;
+  }
+
+  findOne(id: number) {
+    const index = this.associates.findIndex((associate) => associate.id === id);
+    
+    return this.associates[index];
+    
+  }
+
+  update(id: number, updateAssociateDto: UpdateAssociateDto) {
+    const associate = this.findOne(id);
+    const newAssociate = {
+      ...associate,
+      ...updateAssociateDto,
+    }
+
+    const index = this.associates.findIndex((associate) => associate.id === id);
+
+    this.associates[index] = newAssociate;
 
     return newAssociate;
   }
 
-  findAll() {
-    return `This action returns all associate`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} associate`;
-  }
-
-  update(id: number, updateAssociateDto: UpdateAssociateDto) {
-    return `This action updates a #${id} associate`;
-  }
-
   remove(id: number) {
+    const index = this.associates.findIndex((associate) => associate.id === id);
+
+    this.associates.splice(index, 1);
+
     return `This action removes a #${id} associate`;
   }
 }

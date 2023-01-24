@@ -26,8 +26,8 @@ export class AssociateController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.associateService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.associateService.findOne(id);
   }
 
   @Patch(':id')
@@ -39,7 +39,7 @@ export class AssociateController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.associateService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.associateService.remove(id);
   }
 }

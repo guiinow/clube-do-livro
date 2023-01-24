@@ -15,6 +15,6 @@ async function bootstrap() {
   }),
   );
 
-  console.log(`Application is running on: ${await app.getUrl()}/associate`);
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
