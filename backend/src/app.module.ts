@@ -8,10 +8,13 @@ import { AssociateService } from './modules/associate/associate.service';
 import {BooksController } from './modules/books/books.controller';
 import { BooksService } from './modules/books/books.service';
 import { BuyModule } from './modules/buy/buy.module';
+import { LoanModule } from './modules/loan/loan.module';
+import { LoanController } from './modules/loan/loan.controller';
+import { LoanService } from './modules/loan/loan.service';
 
 @Module({
-  imports: [BuyModule],
-  controllers: [AppController, AssociateController, BooksController, BuyController],
-  providers: [AppService, AssociateService, BooksService, BuyService],
+  imports: [BuyModule, LoanModule],
+  controllers: [AppController, AssociateController, BooksController, BuyController, LoanController],
+  providers: [AppService, AssociateService, BooksService, BuyService, LoanService],
 })
 export class AppModule {}
