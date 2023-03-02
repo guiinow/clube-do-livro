@@ -18,6 +18,7 @@ export class CreateBookDto {
     @IsString()
     publisher: string;
 
-    //A definir: File Upload para 'capa do livro'
-
+    @IsString()
+    cover: string;
+    
 }

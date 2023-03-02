@@ -4,5 +4,6 @@ export class BookEntity {
     author: string;
     description: string;
     publisher: string;
+    cover: string;
     //cover: ImageBitmap;
 }

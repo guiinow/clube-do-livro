@@ -1,4 +1,4 @@
-export class Buy {
+export class BuyEntity {
     id: number;
     price: string;
     date: Date;

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
 import { BuyService } from './buy.service';
 import { CreateBuyDto } from './dto/create-buy.dto';
 import { UpdateBuyDto } from './dto/update-buy.dto';
@@ -18,17 +18,23 @@ export class BuyController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.buyService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    const buy = this.buyService.findOne(id);
+    if (!buy){
+      throw new NotFoundException('Buy does not exist');
+    }
+    return buy;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBuyDto: UpdateBuyDto) {
-    return this.buyService.update(+id, updateBuyDto);
+  update(@Param('id') id: number, 
+  @Body() updateBuyDto: UpdateBuyDto
+  ) {
+    return this.buyService.update(id, updateBuyDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.buyService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.buyService.remove(id);
   }
 }

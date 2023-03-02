@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  NotFoundException
 } from '@nestjs/common';
 import { AssociateService } from './associate.service';
 import { CreateAssociateDto } from './dto/create-associate.dto';
@@ -27,15 +28,20 @@ export class AssociateController {
 
   @Get(':id')
   findOne(@Param('id') id: number) {
-    return this.associateService.findOne(id);
+    const associate = this.associateService.findOne(id);
+    if (!associate){
+      throw new NotFoundException('Associate does not exist');
+    }
+    return associate;
+    //return this.associateService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() updateAssociateDto: UpdateAssociateDto,
   ) {
-    return this.associateService.update(+id, updateAssociateDto);
+    return this.associateService.update(id, updateAssociateDto);
   }
 
   @Delete(':id')

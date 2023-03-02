@@ -1,4 +1,4 @@
-export class Loan {
+export class LoanEntity {
     id: number;
     associateId: number;
     bookId: number;

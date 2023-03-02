@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
 import { LoanService } from './loan.service';
 import { CreateLoanDto } from './dto/create-loan.dto';
 import { UpdateLoanDto } from './dto/update-loan.dto';
@@ -18,17 +18,23 @@ export class LoanController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.loanService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    const loan = this.loanService.findOne(id);
+    if (!loan){
+      throw new NotFoundException('Loan does not exist');
+    }
+    return loan;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLoanDto: UpdateLoanDto) {
-    return this.loanService.update(+id, updateLoanDto);
+  update(@Param('id') id: number, 
+  @Body() updateLoanDto: UpdateLoanDto
+  ) {
+    return this.loanService.update(id, updateLoanDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.loanService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.loanService.remove(id);
   }
 }

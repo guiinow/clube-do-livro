@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAssociateDto } from './dto/create-associate.dto';
 import { UpdateAssociateDto } from './dto/update-associate.dto';
 import { AssociateEntity } from './entities/associate.entity';
@@ -18,8 +18,6 @@ export class AssociateService {
     };
 
     this.associates.push(associate);
-
-
     return associate;
   }
 
@@ -39,7 +37,7 @@ export class AssociateService {
     const newAssociate = {
       ...associate,
       ...updateAssociateDto,
-    }
+    };
 
     const index = this.associates.findIndex((associate) => associate.id === id);
 
@@ -50,6 +48,10 @@ export class AssociateService {
 
   remove(id: number) {
     const index = this.associates.findIndex((associate) => associate.id === id);
+
+    if(index === -1) {
+      throw new NotFoundException('User with this id does not exists')
+    }
 
     this.associates.splice(index, 1);
 
