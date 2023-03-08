@@ -28,7 +28,7 @@ function LogIn() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <span class="focus-input" data-placeholder="Password"></span>
+              <span class="focus-input" data-placeholder="Senha"></span>
             </div>
 
             <div class="container-login-form-btn">
