@@ -1,8 +1,9 @@
 import LogIn from "./LogIn";
 import PaginaInicial from "./PaginaInicial";
+import Associado from "./Associado";
 
 function App() {
-  return <PaginaInicial />;
+  return <Associado />;
 }
 
 export default App;
