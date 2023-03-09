@@ -10,7 +10,7 @@ function LogIn() {
       <div class="container-login">
         <div class="wrap-login">
           <form class="loginform">
-            <span class="login-form-title">Bem Vindo!</span>
+            <span class="login-form-title"> <strong>Bem Vindo!</strong></span>
             <div class="wrap-input">
               <input
                 class={email !== "" ? "has-val input" : "input"}
@@ -28,7 +28,7 @@ function LogIn() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <span class="focus-input" data-placeholder="Password"></span>
+              <span class="focus-input" data-placeholder="Senha"></span>
             </div>
 
             <div class="container-login-form-btn">
