@@ -1,84 +1,67 @@
+import * as React from 'react';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import "./styles/inicial.css";
-import {Table, Button} from 'rsuite';
+import MaterialTable from 'material-table';
+import logoEscrita from '../assets/bookClubLogo.png'
 
-const {Column, HeaderCall} = Table
+const columns: GridColDef[] = [
+  { field: 'id', headerName: 'ID', width: 140 },
+  { field: 'nome', headerName: 'Nome', width: 260 },
+  { field: 'telefone', headerName: 'Telefone', width: 260 },
+  { field: 'email', headerName: 'Email', width: 400},
+  { field: 'endereco', headerName:'Endereço', width: 600}
+];
+
+const rows = [
+  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
+  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+];
 
 function Associado(){
-return (
-<div class="Container">
+  return(
+  <div class="Container">
 
   <div class="navbarContainer">
 
     <div class="menuContainer">
       
-      <img src="https://img.freepik.com/vetores-gratis/livro-azul-aberto-em-branco_1308-69339.jpg?w=360" alt="" />
+      <img src={logoEscrita} />
 
       <ul>
-        <li>Associados</li>
+        <li >Associados
+        </li>
         <li>Compras</li>
-        <li>Emprestimo</li>
+        <li>Empréstimo</li>
         <li>Livros</li>
         <li>Home</li>
+        {/* <li>lucas</li> */}
       </ul>
 
-    </div>
+     </div>
 
   </div>
 
   <div class="Main">
-  <Table
-      height={400}
-      data={data}
-      onRowClick={rowData => {
-        console.log(rowData);
-      }}
-    >
-      <Column width={60} align="center" fixed>
-        <HeaderCell>Id</HeaderCell>
-        <Cell dataKey="id" />
-      </Column>
-
-      <Column width={150}>
-        <HeaderCell>First Name</HeaderCell>
-        <Cell dataKey="firstName" />
-      </Column>
-
-      <Column width={150}>
-        <HeaderCell>Last Name</HeaderCell>
-        <Cell dataKey="lastName" />
-      </Column>
-
-      <Column width={100}>
-        <HeaderCell>Gender</HeaderCell>
-        <Cell dataKey="gender" />
-      </Column>
-
-      <Column width={100}>
-        <HeaderCell>Age</HeaderCell>
-        <Cell dataKey="age" />
-      </Column>
-
-      <Column width={150}>
-        <HeaderCell>Postcode</HeaderCell>
-        <Cell dataKey="postcode" />
-      </Column>
-
-      <Column width={300}>
-        <HeaderCell>Email</HeaderCell>
-        <Cell dataKey="email" />
-      </Column>
-      <Column width={80} fixed="right">
-        <HeaderCell>...</HeaderCell>
-      </Column>
-    </Table>
-
+    <div style={{ height: 800, width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+      />
+    </div>
   </div>
 
 </div>
-
-
-
-);
+  );
 }
 
+
 export default Associado;
+

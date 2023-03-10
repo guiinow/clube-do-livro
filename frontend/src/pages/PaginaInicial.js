@@ -1,5 +1,7 @@
 import "./styles/inicial.css";
-
+import logoEscrita from '../assets/bookClubLogo.png'
+import Associado from "./Associado";
+import { Route, Link, Routes } from "react-router-dom";
 
 function PaginaInicial() {
 return (
@@ -9,22 +11,24 @@ return (
 
     <div class="menuContainer">
       
-      <img src="https://img.freepik.com/vetores-gratis/livro-azul-aberto-em-branco_1308-69339.jpg?w=360" alt="" />
+      <img src={logoEscrita} />
 
       <ul>
-        <li>Associados</li>
+        <li >Associados
+        </li>
         <li>Compras</li>
-        <li>Emprestimo</li>
+        <li>Empréstimo</li>
         <li>Livros</li>
         <li>Home</li>
+        {/* <li>lucas</li> */}
       </ul>
 
-    </div>
+     </div>
 
   </div>
 
   <div class="Main">
-
+    {/* <img src={logoEscrita}></img> */}
   </div>
 
 </div>

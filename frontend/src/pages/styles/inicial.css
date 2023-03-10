@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    
 }
 
 .container {
@@ -47,11 +48,13 @@
 
 }
 
-.navbarContainer img {
-    max-width: 140px;
+.menuContainer img {
+    height: 150px;
+    width: 360px;
     display: inline-block;
     padding-top: 35px;
-    /* padding-left: 84px; */
+    padding-left: 84px;
+    margin-top: 12px;
 }
 
 
@@ -59,41 +62,11 @@
     width: 100%;
     background-color: #fff;
     height: 100vh;
-    background-image: url();
+    /* background-image: url(); */
 
     opacity: 0.7;
-    background-color: #221f28;
 
 }
 
 
 body {}
-
-/* .container-page{
-    width: 100%;
-    min-height: 100vh;
-
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-
-    padding: 15px;
-
-    background-color: #fff;
-} */
-
-/* .fundo-logo{
-    height: 214px;
-    width: 100%;
-
-    display: block;
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    padding: 20px 0;
-
-    background-color: #221f28;
-} */
