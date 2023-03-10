@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import "./styles/inicial.css";
-import MaterialTable from 'material-table';
 import logoEscrita from '../assets/bookClubLogo.png'
+import { green } from '@mui/material/colors';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 140 },
@@ -13,15 +13,15 @@ const columns: GridColDef[] = [
 ];
 
 const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  { id: 1, nome: 'Snow', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
+  { id: 2, nome: 'Lannister', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20'  },
+  { id: 3, nome: 'Lannister', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20'  },
+  { id: 4, nome: 'Stark', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
+  { id: 5, nome: 'Targaryen', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
+  { id: 6, nome: 'Melisandre', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
+  { id: 7, nome: 'Clifford', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
+  { id: 8, nome: 'Frances', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
+  { id: 9, nome: 'Roxie', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
 ];
 
 function Associado(){
@@ -49,12 +49,14 @@ function Associado(){
   </div>
 
   <div class="Main">
-    <div style={{ height: 800, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-      />
+    <div class="tabela">
+      <div style={{ height: 800, width: '100%', fontSize: 50}}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+        />
+      </div>
     </div>
   </div>
 
