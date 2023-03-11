@@ -1,41 +1,28 @@
-import "./styles/inicial.css";
+// import "./styles/inicial.css";
 import logoEscrita from '../assets/bookClubLogo.png'
-import Associado from "./Associado";
-import { Route, Link, Routes } from "react-router-dom";
+import Home from "./Home";
+import Associado from './Associado'
+import Livros from "./Livros";
+import Emprestimo from './Emprestimo'
+import Compras from "./Compras";
+import {BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+// import { Switch } from "@mui/material";
+import Navbar from "../components/Navbar";
 
 function PaginaInicial() {
-return (
-<div class="Container">
-
-  <div class="navbarContainer">
-
-    <div class="menuContainer">
+  return (
+    <Router> 
+      <Navbar />
+      <Routes>
+        <Route exact path="/" element={<Home/>} />
+        <Route path="/Associado" element={<Associado/>} />
+        <Route path="/Livros" element={<Livros/>} />
+        <Route path="/Emprestimo" element={<Emprestimo/>} />
+        <Route path="/Compras" element={<Compras/>} />
+      </Routes>
       
-      <img src={logoEscrita} />
-
-      <ul>
-        <li >Associados
-        </li>
-        <li>Compras</li>
-        <li>Empréstimo</li>
-        <li>Livros</li>
-        <li>Home</li>
-        {/* <li>lucas</li> */}
-      </ul>
-
-     </div>
-
-  </div>
-
-  <div class="Main">
-    {/* <img src={logoEscrita}></img> */}
-  </div>
-
-</div>
-
-
-
-);
+    </Router>
+  );
 }
 
 export default PaginaInicial;

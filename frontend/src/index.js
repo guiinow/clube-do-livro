@@ -1,15 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+
 import LogIn from "./pages/LogIn";
 import PaginaInicial from "./pages/PaginaInicial";
 import Associado from "./pages/Associado";
 import Compras from './pages/Compras'
 import Livros from './pages/Livros'
 import Emprestimo from './pages/Emprestimo'
+import Home from './pages/Home'
 
 // const router = createBrowserRouter([
 //   {
@@ -44,7 +42,7 @@ import Emprestimo from './pages/Emprestimo'
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Associado />
+    <PaginaInicial />
   </React.StrictMode>,
   document.getElementById("root")
 );

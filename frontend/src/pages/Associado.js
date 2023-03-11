@@ -1,62 +1,99 @@
 import * as React from 'react';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import "./styles/inicial.css";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import { createTheme, styled } from '@mui/material/styles';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import logoEscrita from '../assets/bookClubLogo.png'
-import { green } from '@mui/material/colors';
 
-const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 140 },
-  { field: 'nome', headerName: 'Nome', width: 260 },
-  { field: 'telefone', headerName: 'Telefone', width: 260 },
-  { field: 'email', headerName: 'Email', width: 400},
-  { field: 'endereco', headerName:'Endereço', width: 600}
-];
+const tema = createTheme({
+  palette: {
+    primary: {
+      main: '#221f28',
+      light: '#eae8ed' ,
+    },
+    secondary: {
+      main: '#fff',
+      dark: '#000'
+    },
+  },
+});
+
+const StyledTableCell = styled(TableCell)(({ theme}) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: tema.palette.primary.main,
+    color: tema.palette.secondary.main,
+    fontSize: 18,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 18,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: tema.palette.primary.light
+    // theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
+
+function createData(id, nome, telefone, email, endereco) {
+  return { id, nome, telefone, email, endereco };
+}
+
 
 const rows = [
-  { id: 1, nome: 'Snow', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
-  { id: 2, nome: 'Lannister', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20'  },
-  { id: 3, nome: 'Lannister', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20'  },
-  { id: 4, nome: 'Stark', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
-  { id: 5, nome: 'Targaryen', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
-  { id: 6, nome: 'Melisandre', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
-  { id: 7, nome: 'Clifford', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
-  { id: 8, nome: 'Frances', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
-  { id: 9, nome: 'Roxie', telefone: 31958475142, email: 'bolinha@gmail.com', endereco: 'rua das tulipas, 20' },
+   createData(1, 'Teste1', 31958475142, 'teste1@gmail.com', 'rua das tulipas, 20') ,
+   createData(2, 'Teste2', 31958475142, 'teste2@gmail.com', 'rua das tulipas, 20') ,
+   createData(3, 'Teste3', 31958475142, 'teste3@gmail.com', 'rua das tulipas, 20') ,
+   createData(4, 'Teste4', 31958475142, 'teste4@gmail.com', 'rua das tulipas, 20') ,
+   createData(5, 'Teste5', 31958475142, 'teste5@gmail.com', 'rua das tulipas, 20') ,
+   createData(6, 'Teste6', 31958475142, 'teste6@gmail.com', 'rua das tulipas, 20') ,
+   createData(7, 'Teste7', 31958475142, 'teste7@gmail.com', 'rua das tulipas, 20') ,
+   createData(8, 'Teste8', 31958475142, 'teste8@gmail.com', 'rua das tulipas, 20') ,
+   createData(9, 'Teste9', 31958475142, 'teste9@gmail.com', 'rua das tulipas, 20') ,
+ 
 ];
 
 function Associado(){
   return(
   <div class="Container">
-
-  <div class="navbarContainer">
-
-    <div class="menuContainer">
-      
-      <img src={logoEscrita} />
-
-      <ul>
-        <li >Associados
-        </li>
-        <li>Compras</li>
-        <li>Empréstimo</li>
-        <li>Livros</li>
-        <li>Home</li>
-        {/* <li>lucas</li> */}
-      </ul>
-
-     </div>
-
-  </div>
-
   <div class="Main">
     <div class="tabela">
-      <div style={{ height: 800, width: '100%', fontSize: 50}}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-        />
-      </div>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 800 }} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>ID</StyledTableCell>
+            <StyledTableCell align="left">NOME</StyledTableCell>
+            <StyledTableCell align="left">TELEFONE</StyledTableCell>
+            <StyledTableCell align="left">EMAIL</StyledTableCell>
+            <StyledTableCell align="left">ENDEREÇO</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <StyledTableRow key={row.name}>
+              <StyledTableCell component="th" scope="row">
+                {row.id}
+              </StyledTableCell>
+              <StyledTableCell align="left">{row.nome}</StyledTableCell>
+              <StyledTableCell align="left">{row.telefone}</StyledTableCell>
+              <StyledTableCell align="left">{row.email}</StyledTableCell>
+              <StyledTableCell align="left">{row.endereco}</StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
     </div>
   </div>
 
@@ -65,5 +102,4 @@ function Associado(){
 }
 
 
-export default Associado;
-
+export default Associado;
