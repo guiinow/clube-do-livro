@@ -1,12 +1,9 @@
-// import "./styles/inicial.css";
-import logoEscrita from '../assets/bookClubLogo.png'
 import Home from "./Home";
 import Associado from './Associado'
 import Livros from "./Livros";
 import Emprestimo from './Emprestimo'
 import Compras from "./Compras";
-import {BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-// import { Switch } from "@mui/material";
+import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 function PaginaInicial() {

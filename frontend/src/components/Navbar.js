@@ -23,7 +23,7 @@ function Navbar(){
               <Link to="/Livros">Livros</Link>
             </li>
             <li className={styles.item}>
-              <Link to="/Emprestimos">Emprestimos</Link>
+              <Link to="/Emprestimo">Empréstimos</Link>
             </li>
             <li className={styles.item}>
               <Link to="/Compras">Compras</Link>
