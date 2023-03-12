@@ -1,13 +1,17 @@
-import postgres from 'postgres'
+import { Client } from 'pg';
 
-
-const sql = postgres('postgres://username:password@host:port/database', {
-    host                 : 'localhost',            // Postgres ip address[s] or domain name[s]
-    port                 : 5432,          // Postgres server port[s]
-    database             : 'bookclub',            // Name of database to connect to
-    username             : 'guiinow',            // Username of database user
-    password             : 'guigatinho',            // Password of database user
-})
-
-
-export default sql
+export const databaseProviders = [
+  {
+    provide: 'DATABASE_CONNECTION',
+    useFactory: () => {
+      const client = new Client({
+        user: 'postgres',
+        host: 'localhost',
+        database: 'bookclub',
+        password: 'password',
+        port: 5432, // or your PostgreSQL port number
+      });
+      return client;
+    },
+  },
+];

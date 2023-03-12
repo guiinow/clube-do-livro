@@ -1,28 +1,43 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAssociateDto } from './dto/create-associate.dto';
 import { UpdateAssociateDto } from './dto/update-associate.dto';
 import { AssociateEntity } from './entities/associate.entity';
+const {Pool } = require('pg')
 
 @Injectable()
 export class AssociateService {
+  constructor(@Inject('DATABASE_CONNECTION') private readonly connection: any) {}
+
   private associates: AssociateEntity[] = [];
-
-  create(createAssociateDto: CreateAssociateDto) {
-    const currentMaxId = this.associates[this.associates.length - 1]?.id || 0;
-
-    const id = currentMaxId + 1;
-
-    const associate = {
-      id,
-      ...createAssociateDto,
-    };
-
-    this.associates.push(associate);
-    return associate;
+  
+  
+  async create(createAssociateDto: CreateAssociateDto): Promise<any> {
+    const result = await this.connection
+      .query('INSERT INTO associates (id, name, email, password, address) VALUES ($1, $2, $3, $4, $5)', [
+        createAssociateDto.id,
+        createAssociateDto.name,
+        createAssociateDto.email,
+        createAssociateDto.password,
+        createAssociateDto.address,
+      ])
+      .then((res) => {
+        console.log('Connected', res);
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+  
+    return result;
   }
+  
 
-  findAll() {
-    return this.associates;
+  async findAll() {
+    const result = await this.connection
+    .query(`SELECT * FROM associate`);
+
+    return result.rows;
   }
 
   findOne(id: number) {

@@ -6,7 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  NotFoundException
+  NotFoundException,
 } from '@nestjs/common';
 import { AssociateService } from './associate.service';
 import { CreateAssociateDto } from './dto/create-associate.dto';
