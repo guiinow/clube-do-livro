@@ -11,6 +11,7 @@ export const databaseProviders = [
         password: 'password',
         port: 5432, // or your PostgreSQL port number
       });
+      client.connect();
       return client;
     },
   },

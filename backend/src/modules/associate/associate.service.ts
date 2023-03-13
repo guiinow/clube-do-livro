@@ -2,7 +2,6 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAssociateDto } from './dto/create-associate.dto';
 import { UpdateAssociateDto } from './dto/update-associate.dto';
 import { AssociateEntity } from './entities/associate.entity';
-const {Pool } = require('pg')
 
 @Injectable()
 export class AssociateService {
@@ -34,8 +33,17 @@ export class AssociateService {
   
 
   async findAll() {
+    console.log('Entrei no find all');
     const result = await this.connection
-    .query(`SELECT * FROM associate`);
+    .query(`SELECT * FROM associate`)
+    .then((res) => {
+      console.log('Connected', res);
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
 
     return result.rows;
   }
