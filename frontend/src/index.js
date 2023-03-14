@@ -7,7 +7,7 @@ import AssociadoCadastro from './pages/cadastro/AssociadoCad'
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <LogIn />
+    <PaginaInicial />
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -43,23 +43,23 @@
 }
 
 .wrap-input-cadastro {
-    width: 443px;
+    width: 383px;
     height: 440px;
     background-color: #e3dbef;
     border-radius: 20px;
     
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
   flex-direction: column;
   
   overflow: hidden;
   padding: 77px 55px 33px 55px;
 }
 
-.wrap-input label{
+/* .wrap-input-cadastro label{
   padding-bottom: 30px;
-}
+} */
 
 .input-cadastro {
   font-size: 15px;
