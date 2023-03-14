@@ -1,27 +1,43 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBuyDto } from './dto/create-buy.dto';
 import { UpdateBuyDto } from './dto/update-buy.dto';
 import { BuyEntity } from './entities/buy.entity';
 @Injectable()
 export class BuyService {
+  constructor(@Inject('DATABASE_CONNECTION') private readonly connection: any) {}
+
   private buys: BuyEntity[] = []; 
   
-  create(createBuyDto: CreateBuyDto) {
-    const currentMaxId = this.buys[this.buys.length - 1]?.id || 0;
-    
-    const id = currentMaxId + 1;
+  async create(createBuyDto: CreateBuyDto) {
+    const result = await this.connection
+    .query('INSERT INTO buy (id, price, date) VALUES ($1, $2, $3)', [
+      createBuyDto.id,
+      createBuyDto.price,
+      createBuyDto.date,
+    ])
+    .then(res => {
+      return res;
+    })
+    .catch(err => {
+      console.log(err);
+      return null;
+    })
 
-    const buy = {
-      id,
-      ...createBuyDto,
-    };
-
-    this.buys.push(buy);
-    return buy;
+    return result.rows;
   }
 
-  findAll() {
-    return this.buys;
+  async findAll() {
+    const result = await this.connection
+    .query(`select * from buy`)
+    .then(res => {
+      return res;
+    })
+    .catch(err => {
+      console.log(err);
+      return null;
+    });
+
+    return result;
   }
 
   findOne(id: number) {
