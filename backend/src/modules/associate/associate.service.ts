@@ -81,7 +81,6 @@ export class AssociateService {
         id,
       ])
       .then((res) => {
-        console.log('Connected', res);
         return res;
       })
       .catch((err) => {
@@ -92,15 +91,18 @@ export class AssociateService {
   }
   
 
-  remove(id: number) {
-    const index = this.associates.findIndex((associate) => associate.id === id);
-
-    if(index === -1) {
-      throw new NotFoundException('User with this id does not exists')
-    }
-
-    this.associates.splice(index, 1);
-
-    return `This action removes a #${id} associate`;
-  }
+  async remove(id: number) {
+    const result = await this.connection
+    .query(`DELETE FROM associate WHERE id = $1`, [id])
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
+  return result;
 }
+
+}
+
