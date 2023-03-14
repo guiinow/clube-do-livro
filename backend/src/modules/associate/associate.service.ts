@@ -8,8 +8,19 @@ export class AssociateService {
   constructor(@Inject('DATABASE_CONNECTION') private readonly connection: any) {}
 
   private associates: AssociateEntity[] = [];
-  
-  
+  async login(email: string, password: string): Promise<any> {
+    try {
+      const result = await this.connection.query('SELECT * FROM associate WHERE email = $1 AND password = $2', [email, password]);
+      if (result.rows.length === 0) {
+        return 'User not found';
+      }
+      return result.rows;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
   async create(createAssociateDto: CreateAssociateDto): Promise<any> {
     const result = await this.connection
       .query('INSERT INTO associate (id, name, email, phone, address, password) VALUES ($1, $2, $3, $4, $5, $6)', [

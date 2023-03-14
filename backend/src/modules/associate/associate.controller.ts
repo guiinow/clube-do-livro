@@ -25,6 +25,13 @@ export class AssociateController {
   findAll() {
     return this.associateService.findAll();
   }
+  
+  @Post('login')
+  async login(@Body() body: { email: string, password: string }): Promise<any> {
+    const { email, password } = body;
+    return this.associateService.login(email, password);
+  }
+  
 
   @Get(':id')
   findOne(@Param('id') id: number) {
