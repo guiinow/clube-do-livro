@@ -72,18 +72,25 @@ export class AssociateService {
     
   }
 
-  update(id: number, updateAssociateDto: UpdateAssociateDto) {
-    const associate = this.findOne(id);
-    const newAssociate = {
-      ...associate,
-      ...updateAssociateDto,
-    };
-
-    const index = this.associates.findIndex((associate) => associate.id === id);
-
-
-    return newAssociate;
+  async update(id: number, updateAssociateDto: UpdateAssociateDto) {
+    const result = await this.connection
+      .query(`UPDATE associate SET name = $1, email = $2, password = $3 WHERE id = $4`, [
+        updateAssociateDto.name,
+        updateAssociateDto.email,
+        updateAssociateDto.password,
+        id,
+      ])
+      .then((res) => {
+        console.log('Connected', res);
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+    return result;
   }
+  
 
   remove(id: number) {
     const index = this.associates.findIndex((associate) => associate.id === id);
