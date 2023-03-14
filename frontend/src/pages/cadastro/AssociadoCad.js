@@ -9,7 +9,7 @@ function AssociadoCadastro() {
       </span>
       <div className="container-cadastro">
         <form className="formulario">
-          <div className="wrap-input">
+          <div className="wrap-input-cadastro">
             <label for="nome">Nome:
             <input
               className="input-cadastro"

@@ -9,7 +9,7 @@ function LivrosCadastro() {
       </span>
       <div className="container-cadastro">
         <form className="formulario">
-          <div className="wrap-input">
+          <div className="wrap-input-cadastro">
             <label for="titulo">Título:
             <input
               className="input-cadastro"

@@ -9,7 +9,7 @@ function EmprestimoCadastro() {
       </span>
       <div className="container-cadastro">
         <form className="formulario">
-          <div className="wrap-input">
+          <div className="wrap-input-cadastro">
             <label for="id-livro">Id Livro:
             <input
               className="input-cadastro"

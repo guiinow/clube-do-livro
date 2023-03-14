@@ -9,7 +9,7 @@ function ComprasCadastro() {
       </span>
       <div className="container-cadastro">
         <form className="formulario">
-          <div className="wrap-input">
+          <div className="wrap-input-cadastro">
             <label for="preco">Preço:
             <input
               className="input-cadastro"
