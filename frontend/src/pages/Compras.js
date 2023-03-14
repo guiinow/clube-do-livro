@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import { useNavigate } from 'react-router-dom';
 
 const tema = createTheme({
   palette: {
@@ -68,9 +69,20 @@ const rows = [
 ];
 
 function Compras(){
+  const navigate = useNavigate();
+
+  const goCreate = () =>{
+    navigate('/compras/cadastro')
+  }
+
   return(
   <div class="Container">
   <div class="Main">
+  <div class='botao-div'>
+      <button type="button" class='botao' onClick={goCreate}>
+        Cadastrar Compra
+      </button>
+    </div>
     <div class="tabela">
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 800 }} aria-label="customized table">

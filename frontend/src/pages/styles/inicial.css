@@ -77,3 +77,26 @@
     margin: 50px;
     font-size: 50px;
 }
+
+.botao-div{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    
+    margin: 50px;
+}
+
+.botao{
+    width: 263px;
+    height: 2rem;
+
+    border-radius: 10px;
+
+    border: none;
+
+    text-decoration: underline;
+
+    color: #221F28;
+
+    cursor: pointer;
+}
