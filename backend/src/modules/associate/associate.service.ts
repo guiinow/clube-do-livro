@@ -32,7 +32,6 @@ export class AssociateService {
         createAssociateDto.password,
       ])
       .then((res) => {
-        console.log('Connected', res);
         return res;
       })
       .catch((err) => {
@@ -45,11 +44,9 @@ export class AssociateService {
   
 
   async findAll() {
-    console.log('Entrei no find all');
     const result = await this.connection
     .query(`SELECT * FROM associate`)
     .then((res) => {
-      console.log('Connected', res);
       return res;
     })
     .catch((err) => {
@@ -60,10 +57,18 @@ export class AssociateService {
     return result.rows;
   }
 
-  findOne(id: number) {
-    const index = this.associates.findIndex((associate) => associate.id === id);
-    
-    return this.associates[index];
+  async findOne(id: number) {
+    const result = await this.connection
+    .query(`SELECT * FROM ASSOCIATE WHERE id = $1`, [id])
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
+
+    return result.rows[0];
     
   }
 
@@ -76,7 +81,6 @@ export class AssociateService {
 
     const index = this.associates.findIndex((associate) => associate.id === id);
 
-    this.associates[index] = newAssociate;
 
     return newAssociate;
   }

@@ -40,7 +40,6 @@ export class AssociateController {
       throw new NotFoundException('Associate does not exist');
     }
     return associate;
-    //return this.associateService.findOne(id);
   }
 
   @Patch(':id')
