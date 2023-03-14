@@ -26,6 +26,12 @@ export class BooksController {
     return this.booksService.findAll();
   }
 
+  @Post ('login')
+  async login(@Body() body: { email: string, password: string }): Promise<any> {
+    const { email, password } = body;
+    return this.booksService.login(email, password);
+  }
+  
   @Get(':id')
   findOne(@Param('id') id: number) {
     const book = this.booksService.findOne(id);
