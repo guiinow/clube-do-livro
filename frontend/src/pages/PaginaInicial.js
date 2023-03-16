@@ -9,24 +9,25 @@ import AssociadoCadastro from "./cadastro/AssociadoCad";
 import ComprasCadastro from './cadastro/ComprasCad';
 import LivrosCadastro from "./cadastro/LivrosCad";
 import EmprestimoCadastro from "./cadastro/EmprestimoCad";
+import Login from "./Login";
 
 
 function PaginaInicial() {
   return (
-    <Router> 
+    <Router>
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<Home/>} />
-        <Route path="/associado" element={<Associado/>} />
-        <Route path="/livros" element={<Livros/>} />
-        <Route path="/emprestimo" element={<Emprestimo/>} />
-        <Route path="/compras" element={<Compras/>} />
-        <Route path="/associado/cadastro" element={<AssociadoCadastro/>}/>
-        <Route path="/livros/cadastro" element={<LivrosCadastro/>}/>
-        <Route path="/compras/cadastro" element={<ComprasCadastro/>}/>
-        <Route path="/emprestimo/cadastro" element={<EmprestimoCadastro/>}/>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/associado" element={<Associado />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/livros" element={<Livros />} />
+        <Route path="/emprestimo" element={<Emprestimo />} />
+        <Route path="/compras" element={<Compras />} />
+        <Route path="/associado/cadastro" element={<AssociadoCadastro />} />
+        <Route path="/livros/cadastro" element={<LivrosCadastro />} />
+        <Route path="/compras/cadastro" element={<ComprasCadastro />} />
+        <Route path="/emprestimo/cadastro" element={<EmprestimoCadastro />} />
       </Routes>
-      
     </Router>
   );
 }

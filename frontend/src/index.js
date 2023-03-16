@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import LogIn from "./pages/LogIn";
+import Login from "./pages/Login";
 import PaginaInicial from "./pages/PaginaInicial";
 import AssociadoCadastro from './pages/cadastro/AssociadoCad'
 

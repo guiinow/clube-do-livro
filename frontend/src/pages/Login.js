@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./styles.css";
 import icon from "../assets/booksIcon.png"
 
-function LogIn() {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -43,4 +43,4 @@ function LogIn() {
   );
 }
 
-export default LogIn;
+export default Login;
