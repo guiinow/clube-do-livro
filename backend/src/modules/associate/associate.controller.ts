@@ -12,6 +12,7 @@ import { AssociateService } from './associate.service';
 import { CreateAssociateDto } from './dto/create-associate.dto';
 import { UpdateAssociateDto } from './dto/update-associate.dto';
 
+
 @Controller('associate')
 export class AssociateController {
   constructor(private readonly associateService: AssociateService) {}

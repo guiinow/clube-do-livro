@@ -8,18 +8,7 @@ export class BooksService {
   constructor(@Inject('DATABASE_CONNECTION') private readonly connection: any) {}
   
   private books: BookEntity[] = [];
-  async login(email: string, password: string): Promise<any> {
-    try {
-      const result = await this.connection.query('SELECT * FROM book WHERE email = $1 AND password = $2', [email, password]);
-      if (result.rows.length === 0) {
-        return 'User not found';
-      }
-      return result.rows;
-    } catch (error) {
-      console.log(error);
-      return error;
-    }
-  }
+ 
   async create(createBookDto: CreateBookDto): Promise<any> {
     const result = await this.connection
       .query('INSERT INTO book (id, buyinfo, title, author, description,publisher, cover) VALUES ($1, $2, $3, $4, $5, $6, $7)', [
