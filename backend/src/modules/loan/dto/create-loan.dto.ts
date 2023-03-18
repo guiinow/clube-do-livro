@@ -1,31 +1,24 @@
 import {IsString, IsNumber, IsDate} from 'class-validator';
 
 export class CreateLoanDto {
+  @IsNumber()
+  id: number;
 
-    @IsNumber()
-    id: number;
+  @IsNumber()
+  associateId: number;
 
-    @IsNumber()
-    associateId: number;
+  @IsNumber()
+  bookId: number;
 
-    @IsNumber()
-    bookId: number;
+  @IsNumber()
+  duration: number;
 
-    @IsNumber()
-    amount: number;
+  @IsString()
+  status: string;
 
-    @IsNumber()
-    interest: number;
+  @IsDate()
+  createAt: Date;
 
-    @IsNumber()
-    duration: number;
-
-    @IsString()
-    status: string;
-
-    @IsDate()
-    createdAt: Date;
-
-    @IsDate()
-    updatedAt: Date;
+  @IsDate()
+  updateAt: Date;
 }

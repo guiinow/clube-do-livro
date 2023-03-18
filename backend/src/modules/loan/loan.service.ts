@@ -10,17 +10,18 @@ export class LoanService {
   
   async create(createLoanDto: CreateLoanDto): Promise<any> {
     const result = await this.connection
-      .query('INSERT INTO loan (id, associateId, bookId, amount, interest, duration, status, createdAt, updatedAt) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)', [
-        createLoanDto.id,
-        createLoanDto.associateId,
-        createLoanDto.bookId,
-        createLoanDto.amount,
-        createLoanDto.interest,
-        createLoanDto.duration,
-        createLoanDto.status,
-        createLoanDto.createdAt,
-        createLoanDto.updatedAt,
-      ])
+      .query(
+        'INSERT INTO loan (id, associateId, bookId, duration, status, createAt, updateAt) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+        [
+          createLoanDto.id,
+          createLoanDto.associateId,
+          createLoanDto.bookId,
+          createLoanDto.duration,
+          createLoanDto.status,
+          createLoanDto.createAt,
+          createLoanDto.updateAt,
+        ],
+      )
       .then((res) => {
         return res;
       })
@@ -62,24 +63,25 @@ export class LoanService {
 
   async update(id: number, updateLoanDto: UpdateLoanDto) {
     const result = await this.connection
-    .query(`UPDATE loan SET associateId = $1, bookId = $2, amount = $3, interest = $4, duration = $5, status = $6, createdAt = $7, updatedAt = $8 WHERE id = $9`, [
-      updateLoanDto.associateId,
-      updateLoanDto.bookId,
-      updateLoanDto.amount,
-      updateLoanDto.interest,
-      updateLoanDto.duration,
-      updateLoanDto.status,
-      updateLoanDto.createdAt,
-      updateLoanDto.updatedAt,
-      id
-    ])
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      console.log(err);
-      return null;
-    });
+      .query(
+        `UPDATE loan SET associateId = $1, bookId = $2 duration = $3, status = $4, createAt = $5, updateAt = $5 WHERE id = $6`,
+        [
+          updateLoanDto.associateId,
+          updateLoanDto.bookId,
+          updateLoanDto.duration,
+          updateLoanDto.status,
+          updateLoanDto.createAt,
+          updateLoanDto.updateAt,
+          id,
+        ],
+      )
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
 
     return result;
   }
