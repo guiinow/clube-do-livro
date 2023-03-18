@@ -1,57 +1,100 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject,Injectable, NotFoundException } from '@nestjs/common';
 import { CreateLoanDto } from './dto/create-loan.dto';
 import { UpdateLoanDto } from './dto/update-loan.dto';
 import { LoanEntity } from './entities/loan.entity';
 @Injectable()
 export class LoanService {
+  constructor(@Inject('DATABASE_CONNECTION') private readonly connection: any) {}
+  
   private loans: LoanEntity[] = [];
   
-  create(createLoanDto: CreateLoanDto) {
-    const currentMaxId = this.loans[this.loans.length - 1]?.id || 0;
-    
-    const id = currentMaxId + 1;
-
-    const loan = {
-      id,
-      ...createLoanDto,
-    };
-
-    this.loans.push(loan);
-    return loan;
+  async create(createLoanDto: CreateLoanDto): Promise<any> {
+    const result = await this.connection
+      .query('INSERT INTO loan (id, associateId, bookId, amount, interest, duration, status, createdAt, updatedAt) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)', [
+        createLoanDto.id,
+        createLoanDto.associateId,
+        createLoanDto.bookId,
+        createLoanDto.amount,
+        createLoanDto.interest,
+        createLoanDto.duration,
+        createLoanDto.status,
+        createLoanDto.createdAt,
+        createLoanDto.updatedAt,
+      ])
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+      
+    return result;
   }
 
-  findAll() {
-    return this.loans;
+  async findAll() {
+    const result = await this.connection
+    .query(`SELECT * FROM loan`)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
+
+    return result.rows;
   }
 
-  findOne(id: number) {
-    const index = this.loans.findIndex((loan) => loan.id === id);
-    
-    return this.loans[index];
+  async findOne(id: number) {
+    const result = await this.connection
+    .query(`SELECT * FROM loan WHERE id = $1`, [id])
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
+
+    return result.rows[0];
   }
 
-  update(id: number, updateLoanDto: UpdateLoanDto) {
-    const loan = this.findOne(id);
-    const newLoan = {
-      ...loan,
-      ...updateLoanDto,
-    };
-    
-    const index = this.loans.findIndex((loan) => loan.id === id);
+  async update(id: number, updateLoanDto: UpdateLoanDto) {
+    const result = await this.connection
+    .query(`UPDATE loan SET associateId = $1, bookId = $2, amount = $3, interest = $4, duration = $5, status = $6, createdAt = $7, updatedAt = $8 WHERE id = $9`, [
+      updateLoanDto.associateId,
+      updateLoanDto.bookId,
+      updateLoanDto.amount,
+      updateLoanDto.interest,
+      updateLoanDto.duration,
+      updateLoanDto.status,
+      updateLoanDto.createdAt,
+      updateLoanDto.updatedAt,
+      id
+    ])
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
 
-    this.loans[index] = newLoan;
-    return newLoan;
+    return result;
   }
 
-  remove(id: number) {
-    const index = this.loans.findIndex((loan) => loan.id === id); 
+  async remove(id: number) {
+    const result = await this.connection
+    .query(`DELETE FROM loan WHERE id = $1`, [id])
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
 
-    if(index === -1) {
-      throw new NotFoundException('Loan with this id does not exists')
-    }
-    this.loans.splice(index, 1);  
-
-    return `This action removes a #${id} loan`;
-
+    return result;
   }
 }
