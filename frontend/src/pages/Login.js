@@ -1,40 +1,114 @@
 import { useState } from "react";
 import "./styles.css";
-import icon from "../assets/booksIcon.png"
+import icon from "../assets/booksIcon.png";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [usuario, setUsuario] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [status, setStatus] = useState({
+    type: "",
+    mensagem: "",
+  });
+
+  const valorInput = (e) =>
+    setUsuario({ ...usuario, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
+    // changed Login to handleSubmit
+    e.preventDefault();
+
+    try {
+      console.log(
+        `usuario email: ${usuario.email} e usuario senha:${usuario.password}`
+      );
+      const response = await fetch("http://127.0.0.1:3000/associate/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(usuario), // fixed to pass just the usuario object
+      });
+
+      const responseJson = await response.json(); // simplified to use async/await instead of then()
+      console.log(`mostrando response ${responseJson}`)
+
+      if (responseJson.erro === true) {
+        setStatus({
+          type: "erro",
+          mensagem: responseJson.mensagem,
+        });
+      } else {
+        setStatus({
+          type: "success",
+          mensagem: responseJson.mensagem,
+        });
+
+        // statusLogin(responseJson.tipo);
+      }
+    } catch (error) {
+      setStatus({
+        type: "erro",
+        mensagem: "Erro de autenticação!",
+      });
+    }
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
-    <div class="container">
-      <div class="container-login">
-        <div class="wrap-login">
-          <form class="loginform">
-            <span class="icon"><img src={icon} alt="Logo BookClub" /></span>
-            <span class="login-form-title"> <strong>Bem Vindo!</strong></span>
-            <div class="wrap-input">
+    <div className="container">
+      {" "}
+      {/* changed class to className */}
+      <div className="container-login">
+        <div className="wrap-login">
+          <form className="loginform" onSubmit={handleSubmit}>
+            {" "}
+            {/* added onSubmit */}
+            <span className="icon">
+              <img src={icon} alt="Logo BookClub" />
+            </span>
+            <span className="login-form-title">
+              {" "}
+              <strong>Bem Vindo!</strong>
+            </span>
+            <div className="wrap-input">
               <input
-                class={email !== "" ? "has-val input" : "input"}
+                className={usuario.email !== "" ? "has-val input" : "input"} // changed to use usuario object
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="email" // added name to match object property
+                value={usuario.email} // changed to use usuario object
+                onChange={valorInput} // changed to use valorInput function
               />
-              <span class="focus-input" data-placeholder="Email"></span>
+              <span className="focus-input" data-placeholder="Email"></span>
             </div>
-
-            <div class="wrap-input">
+            <div className="wrap-input">
               <input
-                class={password !== "" ? "has-val input" : "input"}
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                className={usuario.password !== "" ? "has-val input" : "input"} // changed to use usuario object
+                type={showPassword ? "text" : "password"} // added show/hide password feature
+                name="password" // added name to match object property
+                value={usuario.password} // changed to use usuario object
+                onChange={valorInput} // changed to use valorInput function
               />
-              <span class="focus-input" data-placeholder="Senha"></span>
+              <span className="focus-input" data-placeholder="Senha"></span>
+              <button type="button" onClick={handleTogglePassword}>
+                {" "}
+                {/* added button to show/hide password */}
+                {showPassword ? "Esconder" : "Mostrar"}{" "}
+                {/* changed text of button */}
+              </button>
             </div>
-
-            <div class="container-login-form-btn">
-              <button class="login-form-btn">Login</button>
+            <div className="container-login-form-btn">
+              <button type="submit" className="login-form-btn">
+                Login
+              </button>{" "}
+              {/* changed to use type="submit" */}
             </div>
           </form>
         </div>
