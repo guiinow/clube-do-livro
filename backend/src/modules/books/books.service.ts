@@ -8,7 +8,6 @@ export class BooksService {
   constructor(@Inject('DATABASE_CONNECTION') private readonly connection: any) {}
   
   private books: BookEntity[] = [];
- 
   async create(createBookDto: CreateBookDto): Promise<any> {
     const result = await this.connection
       .query('INSERT INTO book (id, buyinfo, title, author, description,publisher, cover) VALUES ($1, $2, $3, $4, $5, $6, $7)', [
@@ -81,7 +80,6 @@ export class BooksService {
     return result;
   }
 
-  
   async remove(id: number): Promise<any> {
     const result = await this.connection
     .query(`DELETE FROM book WHERE id = $1`, [id])
@@ -96,7 +94,3 @@ export class BooksService {
     return result;
   }
 }
-
-
-
-  

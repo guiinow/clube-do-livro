@@ -25,7 +25,7 @@ export class BooksController {
   findAll() {
     return this.booksService.findAll();
   }
-  
+
   @Get(':id')
   findOne(@Param('id') id: number) {
     const book = this.booksService.findOne(id);

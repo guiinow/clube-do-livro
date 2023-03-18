@@ -1,5 +1,6 @@
 export class BookEntity {
     id: number;
+    buyinfo: number;
     title: string;
     author: string;
     description: string;
