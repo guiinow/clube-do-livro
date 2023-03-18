@@ -9,6 +9,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+
 
 const tema = createTheme({
   palette: {
@@ -72,6 +74,23 @@ function Associado(){
   const goCreate = () => {
     navigate('/associado/Cadastro');
   }
+
+  const [usuario, setUsuario] = useState({
+    id: "",
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    password: "",
+  });
+
+  const response = fetch("http://127.0.0.1:3000/associate/", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+console.log(`resposta de todos os associados ${response[1]}`)
 
   return(
   <div class="Container">

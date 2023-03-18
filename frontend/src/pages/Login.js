@@ -1,6 +1,9 @@
 import { useState } from "react";
 import "./styles.css";
 import icon from "../assets/booksIcon.png";
+import { api } from "../service/api";
+import { useNavigate } from "react-router-dom";
+
 
 function Login() {
   const [usuario, setUsuario] = useState({
@@ -13,6 +16,9 @@ function Login() {
     mensagem: "",
   });
 
+  const navigate = useNavigate();
+
+
   const valorInput = (e) =>
     setUsuario({ ...usuario, [e.target.name]: e.target.value });
 
@@ -24,35 +30,12 @@ function Login() {
       console.log(
         `usuario email: ${usuario.email} e usuario senha:${usuario.password}`
       );
-      const response = await fetch("http://127.0.0.1:3000/associate/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(usuario), // fixed to pass just the usuario object
-      });
-
-      const responseJson = await response.json(); // simplified to use async/await instead of then()
-      console.log(`mostrando response ${responseJson}`)
-
-      if (responseJson.erro === true) {
-        setStatus({
-          type: "erro",
-          mensagem: responseJson.mensagem,
-        });
-      } else {
-        setStatus({
-          type: "success",
-          mensagem: responseJson.mensagem,
-        });
-
-        // statusLogin(responseJson.tipo);
-      }
+      const response = await api.post("associate/login",
+        usuario, // fixed to pass just the usuario object
+      );
+      navigate('/');
     } catch (error) {
-      setStatus({
-        type: "erro",
-        mensagem: "Erro de autenticação!",
-      });
+      console.log(error);
     }
   };
 
