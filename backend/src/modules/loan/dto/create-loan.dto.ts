@@ -17,8 +17,8 @@ export class CreateLoanDto {
   status: string;
 
   @IsDate()
-  createAt: Date;
+  createat: Date;
 
   @IsDate()
-  updateAt: Date;
+  updateat: Date;
 }

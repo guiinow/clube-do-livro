@@ -11,15 +11,15 @@ export class LoanService {
   async create(createLoanDto: CreateLoanDto): Promise<any> {
     const result = await this.connection
       .query(
-        'INSERT INTO loan (id, associateId, bookId, duration, status, createAt, updateAt) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+        'INSERT INTO loan (id, associateId, bookId, duration, status, createat, updateat) VALUES ($1, $2, $3, $4, $5, $6, $7)',
         [
           createLoanDto.id,
           createLoanDto.associateId,
           createLoanDto.bookId,
           createLoanDto.duration,
           createLoanDto.status,
-          createLoanDto.createAt,
-          createLoanDto.updateAt,
+          createLoanDto.createat,
+          createLoanDto.updateat,
         ],
       )
       .then((res) => {
@@ -64,7 +64,7 @@ export class LoanService {
   async update(id: number, updateLoanDto: UpdateLoanDto) {
     const result = await this.connection
       .query(
-        `UPDATE loan SET associateId = $1, bookId = $2 duration = $3, status = $4, createAt = $5, updateAt = $5 WHERE id = $6`,
+        `UPDATE loan SET associateId = $1, bookId = $2 duration = $3, status = $4, createat = $5, updateat = $5 WHERE id = $6`,
         [
           updateLoanDto.associateId,
           updateLoanDto.bookId,
