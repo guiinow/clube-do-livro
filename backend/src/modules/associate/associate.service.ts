@@ -1,4 +1,4 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpStatus, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAssociateDto } from './dto/create-associate.dto';
 import { UpdateAssociateDto } from './dto/update-associate.dto';
 import { AssociateEntity } from './entities/associate.entity';
@@ -12,9 +12,9 @@ export class AssociateService {
     try {
       const result = await this.connection.query('SELECT * FROM associate WHERE email = $1 AND password = $2', [email, password]);
       if (result.rows.length === 0) {
-        return 'User not found';
+        return HttpStatus.UNAUTHORIZED;
       }
-      return result.rows;
+      return HttpStatus.OK;
     } catch (error) {
       console.log(error);
       return error;
