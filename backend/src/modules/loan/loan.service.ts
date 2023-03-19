@@ -11,9 +11,8 @@ export class LoanService {
   async create(createLoanDto: CreateLoanDto): Promise<any> {
     const result = await this.connection
       .query(
-        'INSERT INTO loan (id, associateId, bookId, duration, status, createat, updateat) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+        'INSERT INTO loan (associateId, bookId, duration, status, createat, updateat) VALUES ($1, $2, $3, $4, $5, $6)',
         [
-          createLoanDto.id,
           createLoanDto.associateId,
           createLoanDto.bookId,
           createLoanDto.duration,

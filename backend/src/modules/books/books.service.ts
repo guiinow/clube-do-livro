@@ -10,8 +10,7 @@ export class BooksService {
   private books: BookEntity[] = [];
   async create(createBookDto: CreateBookDto): Promise<any> {
     const result = await this.connection
-      .query('INSERT INTO book (id, buyinfo, title, author, description,publisher, cover) VALUES ($1, $2, $3, $4, $5, $6, $7)', [
-        createBookDto.id,
+      .query('INSERT INTO book (buyinfo, title, author, description,publisher, cover) VALUES ($1, $2, $3, $4, $5, $6)', [
         createBookDto.buyinfo,
         createBookDto.title,
         createBookDto.author,

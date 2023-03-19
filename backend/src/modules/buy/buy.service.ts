@@ -10,8 +10,7 @@ export class BuyService {
   
   async create(createBuyDto: CreateBuyDto) {
     const result = await this.connection
-    .query('INSERT INTO buy (id, price, date) VALUES ($1, $2, $3)', [
-      createBuyDto.id,
+    .query('INSERT INTO buy (price, date) VALUES ($1, $2)', [
       createBuyDto.price,
       createBuyDto.date,
     ])

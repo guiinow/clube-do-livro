@@ -23,8 +23,7 @@ export class AssociateService {
 
   async create(createAssociateDto: CreateAssociateDto): Promise<any> {
     const result = await this.connection
-      .query('INSERT INTO associate (id, name, email, phone, address, password) VALUES ($1, $2, $3, $4, $5, $6)', [
-        createAssociateDto.id,
+      .query('INSERT INTO associate (name, email, phone, address, password) VALUES ($1, $2, $3, $4, $5)', [
         createAssociateDto.name,
         createAssociateDto.email,
         createAssociateDto.phone,
