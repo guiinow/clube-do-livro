@@ -1,4 +1,5 @@
 import cadastro from "../cadastro/cadastro.css";
+import Navbar from "../../components/Navbar";
 
 function LivrosCadastro() {
   return (

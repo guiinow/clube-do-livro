@@ -4,22 +4,21 @@ import Livros from "./Livros";
 import Emprestimo from './Emprestimo'
 import Compras from "./Compras";
 import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import AssociadoCadastro from "./cadastro/AssociadoCad";
 import ComprasCadastro from './cadastro/ComprasCad';
 import LivrosCadastro from "./cadastro/LivrosCad";
 import EmprestimoCadastro from "./cadastro/EmprestimoCad";
 import Login from "./Login";
+import Navbar from "../components/Navbar";
 
 
 function PaginaInicial() {
   return (
     <Router>
-      <Navbar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Login />} />
         <Route path="/associado" element={<Associado />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/livros" element={<Livros />} />
         <Route path="/emprestimo" element={<Emprestimo />} />
         <Route path="/compras" element={<Compras />} />
@@ -33,3 +32,4 @@ function PaginaInicial() {
 }
 
 export default PaginaInicial;
+

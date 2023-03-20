@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
+import Navbar from '../components/Navbar';
 
 
 const tema = createTheme({
@@ -94,6 +95,7 @@ console.log(`resposta de todos os associados ${response[1]}`)
 
   return(
   <div class="Container">
+  <Navbar />
   <div class="Main">
     <div class='botao-div'>
       <button type="button" class='botao' onClick={goCreate}>

@@ -1,8 +1,10 @@
 import cadastro from "../cadastro/cadastro.css";
+import Navbar from "../../components/Navbar";
 
 function ComprasCadastro() {
   return (
     <div className="container">
+      <Navbar />
       <span class="cadastro-titulo">
         {" "}
         <strong>Cadastro Compra</strong>

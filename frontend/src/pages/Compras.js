@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 const tema = createTheme({
   palette: {
@@ -77,6 +78,7 @@ function Compras(){
 
   return(
   <div class="Container">
+  <Navbar />
   <div class="Main">
   <div class='botao-div'>
       <button type="button" class='botao' onClick={goCreate}>

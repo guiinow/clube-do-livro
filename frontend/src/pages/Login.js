@@ -33,7 +33,7 @@ function Login() {
       const response = await api.post("associate/login",
         usuario, // fixed to pass just the usuario object
       );
-      navigate('/');
+      navigate('/Home');
     } catch (error) {
       console.log(error);
     }
