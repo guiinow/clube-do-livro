@@ -1,32 +1,32 @@
-import * as React from 'react';
+import * as React from "react";
 import "./styles/inicial.css";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import { createTheme, styled } from '@mui/material/styles';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { useNavigate } from 'react-router-dom';
-import { useState } from "react";
-import Navbar from '../components/Navbar';
-
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import { createTheme, styled } from "@mui/material/styles";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import Navbar from "../components/Navbar";
+import { api } from "../service/api";
 
 const tema = createTheme({
   palette: {
     primary: {
-      main: '#221f28',
-      light: '#eae8ed' ,
+      main: "#221f28",
+      light: "#eae8ed",
     },
     secondary: {
-      main: '#fff',
-      dark: '#000'
+      main: "#fff",
+      dark: "#000",
     },
   },
 });
 
-const StyledTableCell = styled(TableCell)(({ theme}) => ({
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: tema.palette.primary.main,
     color: tema.palette.secondary.main,
@@ -37,104 +37,92 @@ const StyledTableCell = styled(TableCell)(({ theme}) => ({
   },
 }));
 
-
-
-
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: tema.palette.primary.light
+  "&:nth-of-type(odd)": {
+    backgroundColor: tema.palette.primary.light,
     // theme.palette.action.hover,
   },
   // hide last border
-  '&:last-child td, &:last-child th': {
+  "&:last-child td, &:last-child th": {
     border: 0,
   },
 }));
 
-function createData(id, nome, telefone, email, endereco) {
-  return { id, nome, telefone, email, endereco };
-}
+function Associado() {
+  const [usuarios, setUsuario] = useState([
+    {
+      id: "",
+      name: "",
+      phone: "",
+      email: "",
+      address: "",
+    },
+  ]);
 
+  const navigate = useNavigate();
 
-const rows = [
-   createData(1, 'Teste1', 31958475142, 'teste1@gmail.com', 'rua das tulipas, 20') ,
-   createData(2, 'Teste2', 31958475142, 'teste2@gmail.com', 'rua das tulipas, 20') ,
-   createData(3, 'Teste3', 31958475142, 'teste3@gmail.com', 'rua das tulipas, 20') ,
-   createData(4, 'Teste4', 31958475142, 'teste4@gmail.com', 'rua das tulipas, 20') ,
-   createData(5, 'Teste5', 31958475142, 'teste5@gmail.com', 'rua das tulipas, 20') ,
-   createData(6, 'Teste6', 31958475142, 'teste6@gmail.com', 'rua das tulipas, 20') ,
-   createData(7, 'Teste7', 31958475142, 'teste7@gmail.com', 'rua das tulipas, 20') ,
-   createData(8, 'Teste8', 31958475142, 'teste8@gmail.com', 'rua das tulipas, 20') ,
-   createData(9, 'Teste9', 31958475142, 'teste9@gmail.com', 'rua das tulipas, 20') ,
- 
-];
-
-function Associado(){
-  const navigate = useNavigate()
-  
   const goCreate = () => {
-    navigate('/associado/Cadastro');
-  }
+    navigate("/associado/Cadastro");
+  };
 
-  const [usuario, setUsuario] = useState({
-    id: "",
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    password: "",
-  });
+  useEffect(() => {
+    api.get("associate").then((response) => {
+      setUsuario(response.data);
+    });
+  }, []);
 
-  const response = fetch("http://127.0.0.1:3000/associate/", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-console.log(`resposta de todos os associados ${response[1]}`)
+  console.log(usuarios)
 
-  return(
-  <div class="Container">
-  <Navbar />
-  <div class="Main">
-    <div class='botao-div'>
-      <button type="button" class='botao' onClick={goCreate}>
-        Cadastrar Associado
-      </button>
+  return (
+    <div class="Container">
+      <Navbar />
+      <div class="Main">
+        <div class="botao-div">
+          <button type="button" class="botao" onClick={goCreate}>
+            Cadastrar Associado
+          </button>
+        </div>
+        <div class="tabela">
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 800 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>ID</StyledTableCell>
+                  <StyledTableCell align="left">NOME</StyledTableCell>
+                  <StyledTableCell align="left">TELEFONE</StyledTableCell>
+                  <StyledTableCell align="left">EMAIL</StyledTableCell>
+                  <StyledTableCell align="left">ENDEREÇO</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {usuarios.map((usuario) => {
+                  return (
+                    <StyledTableRow key={usuario.id}>
+                      <StyledTableCell component="th" scope="row">
+                        {usuario.id}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {usuario.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {usuario.phone}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {usuario.email}
+                      </StyledTableCell>
+                      <StyledTableCell align="left">
+                        {usuario.address}
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+      </div>
     </div>
-    <div class="tabela">
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 800 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>ID</StyledTableCell>
-            <StyledTableCell align="left">NOME</StyledTableCell>
-            <StyledTableCell align="left">TELEFONE</StyledTableCell>
-            <StyledTableCell align="left">EMAIL</StyledTableCell>
-            <StyledTableCell align="left">ENDEREÇO</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.id}
-              </StyledTableCell>
-              <StyledTableCell align="left">{row.nome}</StyledTableCell>
-              <StyledTableCell align="left">{row.telefone}</StyledTableCell>
-              <StyledTableCell align="left">{row.email}</StyledTableCell>
-              <StyledTableCell align="left">{row.endereco}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </div>
-  </div>
-
-</div>
   );
 }
 
-
-export default Associado;
+export default Associado;

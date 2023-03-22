@@ -10,6 +10,8 @@ import Paper from '@mui/material/Paper';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import { useState, useEffect } from "react";
+import { api } from '../service/api';
 
 const tema = createTheme({
   palette: {
@@ -45,36 +47,27 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(id, titulo, autor, editora, descricao) {
-  return { id, titulo, autor, editora, descricao };
-}
-
-
-
-
-const rows = [
-   createData(1, 'titulo', 'autor', 'editora', 'descricao'),
-   createData(2, 'titulo', 'autor', 'editora', 'descricao'),
-   createData(3, 'titulo', 'autor', 'editora', 'descricao'),
-   createData(4, 'titulo', 'autor', 'editora', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
-   createData(5, 'titulo', 'autor', 'editora', 'descricao'),
-   createData(6, 'titulo', 'autor', 'editora', 'descricao'),
-   createData(7, 'titulo', 'autor', 'editora', 'descricao'),
-   createData(8, 'titulo', 'autor', 'editora', 'descricao'),
-   createData(9, 'titulo', 'autor', 'editora', 'descricao'),
-   createData(10, 'titulo', 'autor', 'editora', 'descricao'),
-   createData(11, 'titulo', 'autor', 'editora', 'descricao'),
-   createData(12, 'titulo', 'autor', 'editora', 'descricao'),
-   createData(13, 'titulo', 'autor', 'editora', 'descricao'),
-    
-];
 
 function Livros(){
+  const [livros, setLivro] = useState([{
+    id: "",
+    title: "",
+    author: "",
+    publisher: "",
+    description: "",
+  }]);
+
   const navigate = useNavigate()
   
   const goCreate = () => {
     navigate('/livros/cadastro');
   }
+
+  useEffect(() => {
+    api.get("books").then(response => {
+      setLivro(response.data);
+    });
+  }, [])
 
   return(
     
@@ -99,15 +92,15 @@ function Livros(){
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {livros.map((livro) => (
+            <StyledTableRow key={livro.id}>
               <StyledTableCell component="th" scope="row">
-                {row.id}
+                {livro.id}
               </StyledTableCell>
-              <StyledTableCell align="left">{row.titulo}</StyledTableCell>
-              <StyledTableCell align="left">{row.autor}</StyledTableCell>
-              <StyledTableCell align="left">{row.editora}</StyledTableCell>
-              <StyledTableCell align="left">{row.descricao}</StyledTableCell>
+              <StyledTableCell align="left">{livro.title}</StyledTableCell>
+              <StyledTableCell align="left">{livro.author}</StyledTableCell>
+              <StyledTableCell align="left">{livro.publisher}</StyledTableCell>
+              <StyledTableCell align="left">{livro.description}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
