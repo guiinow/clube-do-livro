@@ -28,6 +28,8 @@ console.log(livro)
       const response = await api.post("books", 
         livro, // fixed to pass just the usuario object
       );
+      window.alert("Livro cadastrado com sucesso!");
+      navigate("/Livros");
     } catch (error) {
       console.log(error);
     }

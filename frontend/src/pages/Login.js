@@ -37,7 +37,7 @@ function Login() {
         navigate('/Home');
       }else{
         console.log(response.data)
-        window.alert("Usuário não cadastrado!! Tente novamente ou faça login como administrador para cadastrar novo usuário");
+        window.alert("Usuário não cadastrado.\nTente novamente com usuário existente");
         navigate('/');
       }
     } catch (error) {

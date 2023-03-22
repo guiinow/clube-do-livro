@@ -32,7 +32,7 @@ console.log(usuario)
       const response = await api.post("associate", 
         usuario, // fixed to pass just the usuario object
       );
-      window.alert("Associado cadastrado com sucesso!!");
+      window.alert("Associado cadastrado com sucesso!");
       navigate('/Associado');
     } catch (error) {
       console.log(error);

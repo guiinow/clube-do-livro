@@ -28,6 +28,8 @@ console.log(loan)
       const response = await api.post("loan", 
         loan, // fixed to pass just the usuario object
       );
+      window.alert("Emprestimo cadastrado com sucesso!");
+      navigate("/Emprestimo");
     } catch (error) {
       console.log(error);
     }

@@ -26,6 +26,8 @@ console.log(compra)
       const response = await api.post("buy", 
         compra, // fixed to pass just the usuario object
       );
+      window.alert("Compra cadastrado com sucesso!");
+      navigate("/Compras");
     } catch (error) {
       console.log(error);
     }
