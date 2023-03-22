@@ -26,7 +26,7 @@ console.log(usuario)
       console.log(
         `usuario email: ${usuario.email} e usuario senha:${usuario.password}`
       );
-      const response = await api.post("associate/create",
+      const response = await api.post("associate", 
         usuario, // fixed to pass just the usuario object
       );
     } catch (error) {
@@ -91,7 +91,7 @@ console.log(usuario)
               placeholder="Digite sua senha: "
             /></label>
             <div class="container-cadastro-form-btn">
-              <button class="cadastro-form-btn" type="submit">
+              <button class="cadastro-form-btn" onSubmit={handleSubmit}>
                 Cadastrar
               </button>
             </div>
