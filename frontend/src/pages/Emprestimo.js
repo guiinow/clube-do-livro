@@ -68,10 +68,10 @@ function Emprestimo() {
   };
 
   useEffect(() => {
-    api.get("loan").then(response => {
+    api.get("loan").then((response) => {
       setEmprestimo(response.data);
     });
-  }, [])
+  }, []);
 
   return (
     <div class="Container">

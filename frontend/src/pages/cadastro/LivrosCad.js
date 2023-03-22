@@ -2,6 +2,8 @@ import cadastro from "../cadastro/cadastro.css";
 import Navbar from "../../components/Navbar";
 import { useState } from "react";
 import { api } from "../../service/api";
+import { useNavigate } from "react-router-dom";
+
 
 function LivrosCadastro() {
 
@@ -11,6 +13,8 @@ function LivrosCadastro() {
     description: "",
     publisher: "",
   });
+
+    const navigate = useNavigate();
 
 console.log(livro)
 
