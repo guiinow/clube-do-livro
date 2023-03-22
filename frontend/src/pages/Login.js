@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function Login() {
+  
   const [usuario, setUsuario] = useState({
     email: "",
     password: "",
@@ -33,6 +34,7 @@ function Login() {
       const response = await api.post("associate/login",
         usuario, // fixed to pass just the usuario object
       );
+      window.alert("passar esse alert pro bloco catch e impedir de logar em caso de erro")
       navigate('/Home');
     } catch (error) {
       console.log(error);
@@ -80,13 +82,13 @@ function Login() {
                 onChange={valorInput} // changed to use valorInput function
               />
               <span className="focus-input" data-placeholder="Senha"></span>
-              <button type="button" onClick={handleTogglePassword}>
+            </div>
+            <button id="TogglePassword" type="button" onClick={handleTogglePassword}>
                 {" "}
                 {/* added button to show/hide password */}
-                {showPassword ? "Esconder" : "Mostrar"}{" "}
+                {showPassword ? "Esconder senha" : "Mostrar senha"}{" "}
                 {/* changed text of button */}
               </button>
-            </div>
             <div className="container-login-form-btn">
               <button type="submit" className="login-form-btn">
                 Login

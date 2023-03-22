@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar";
 function LivrosCadastro() {
   return (
     <div className="container">
+      <Navbar />
       <span class="cadastro-titulo">
         {" "}
         <strong>Cadastro Livro</strong>
