@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function Login() {
+  
   const [usuario, setUsuario] = useState({
     email: "",
     password: "",
@@ -17,7 +18,6 @@ function Login() {
   });
 
   const navigate = useNavigate();
-
 
   const valorInput = (e) =>
     setUsuario({ ...usuario, [e.target.name]: e.target.value });
@@ -33,7 +33,13 @@ function Login() {
       const response = await api.post("associate/login",
         usuario, // fixed to pass just the usuario object
       );
-      navigate('/Home');
+      if(response.data == 200){
+        navigate('/Home');
+      }else{
+        console.log(response.data)
+        window.alert("Usuário não cadastrado!! Tente novamente ou faça login como administrador para cadastrar novo usuário");
+        navigate('/');
+      }
     } catch (error) {
       console.log(error);
     }
@@ -80,13 +86,13 @@ function Login() {
                 onChange={valorInput} // changed to use valorInput function
               />
               <span className="focus-input" data-placeholder="Senha"></span>
-              <button type="button" onClick={handleTogglePassword}>
+            </div>
+            <button id="TogglePassword" type="button" onClick={handleTogglePassword}>
                 {" "}
                 {/* added button to show/hide password */}
-                {showPassword ? "Esconder" : "Mostrar"}{" "}
+                {showPassword ? "Esconder senha" : "Mostrar senha"}{" "}
                 {/* changed text of button */}
               </button>
-            </div>
             <div className="container-login-form-btn">
               <button type="submit" className="login-form-btn">
                 Login

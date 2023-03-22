@@ -1,46 +1,86 @@
 import cadastro from "../cadastro/cadastro.css";
 import Navbar from "../../components/Navbar";
+import { useState } from "react";
+import { api } from "../../service/api";
 
 function LivrosCadastro() {
+
+  const [livro, setLivro] = useState({
+    title: "",
+    author: "",
+    description: "",
+    publisher: "",
+  });
+
+console.log(livro)
+
+  const valorInput = (e) =>
+    setLivro({ ...livro, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
+    // changed Login to handleSubmit
+    e.preventDefault();
+
+    try {
+      console.log(
+        livro
+      );
+      const response = await api.post("books", 
+        livro, // fixed to pass just the usuario object
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="container">
+      <Navbar />
       <span class="cadastro-titulo">
         {" "}
         <strong>Cadastro Livro</strong>
       </span>
       <div className="container-cadastro">
-        <form className="formulario">
+        <form onSubmit={handleSubmit} className="formulario">
           <div className="wrap-input-cadastro">
-            <label for="titulo">Título:
+            <label for="title">Título:
             <input
               className="input-cadastro"
-              name="titulo"
+              name="title"
               type="text"
+              value={livro.title} // changed to use usuario object
+              onChange={valorInput}
               placeholder="Digite o título: "
             /></label>
-            <label for="autor">Autor:
+            <label for="author">Autor:
             <input
               className="input-cadastro"
-              name="autor"
+              name="author"
               type="text"
+              value={livro.author} // changed to use usuario object
+              onChange={valorInput}
               placeholder="Digite o autor: "
             /></label>
-            <label for="editora">Editora:
+            <label for="description">Descrição:
             <input
               className="input-cadastro"
-              name="editora"
-              type="text"
-              placeholder="Digite a editora: "
-            /></label>
-            <label for="descricao">Descrição:
-            <input
-              className="input-cadastro"
-              name="descricao"
+              name="description"
               type= "text"
+              value={livro.description} // changed to use usuario object
+              onChange={valorInput}
               placeholder="Digite a descrição: "
             /></label>
+            <label for="publisher">Editora:
+            <input
+              className="input-cadastro"
+              name="publisher"
+              type="text"
+              value={livro.publisher} // changed to use usuario object
+              onChange={valorInput}
+              placeholder="Digite a editora: "
+            /></label>
             <div class="container-cadastro-form-btn">
-              <button class="cadastro-form-btn" type="submit">
+              <button class="cadastro-form-btn" onSubmit={handleSubmit}>
                 Cadastrar
               </button>
             </div>

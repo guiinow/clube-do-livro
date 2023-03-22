@@ -19,7 +19,7 @@
   line-height: 1.2;
   text-align: center;
 
-  padding-top: 21px;
+  padding-top: 28px;
 }
 
 .container-cadastro {
@@ -43,8 +43,8 @@
 }
 
 .wrap-input-cadastro {
-    width: 383px;
-    height: 440px;
+    /* width: 383px;
+    height: 440px; */
     background-color: #e3dbef;
     border-radius: 20px;
     
@@ -54,7 +54,7 @@
   flex-direction: column;
   
   overflow: hidden;
-  padding: 77px 55px 33px 55px;
+  padding: 55px 55px 33px 55px;
 }
 
 /* .wrap-input-cadastro label{
@@ -66,12 +66,15 @@
   color: #000;
   line-height: 1.2;
   border: none;
-  display: flex;
+  display: block;
+
+  width: 300px;
+  height: 35px;
+  margin-bottom: 25px;
 
   background-color: white;
 
-  padding: 0px 5px;
-  text-align: left;
+  padding: 0 5px;
 
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -81,6 +84,7 @@
   display: flex;
   justify-content: left;
   text-align: left;
+  
 }
 
 .container-cadastro-form-btn {
@@ -109,4 +113,7 @@
 
   font-size: 20px;
   background-color: #221f28;
+
+  cursor: pointer;
+
 }
