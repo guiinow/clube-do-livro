@@ -2,6 +2,7 @@ import cadastro from "../cadastro/cadastro.css";
 import Navbar from "../../components/Navbar";
 import { useState } from "react";
 import { api } from "../../service/api";
+import { useNavigate } from "react-router-dom";
 
 function AssociadoCadastro() {
 
@@ -12,6 +13,8 @@ function AssociadoCadastro() {
     address: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
 console.log(usuario)
 
@@ -29,10 +32,13 @@ console.log(usuario)
       const response = await api.post("associate", 
         usuario, // fixed to pass just the usuario object
       );
+      window.alert("Associado cadastrado com sucesso!!");
+      navigate('/Associado');
     } catch (error) {
       console.log(error);
     }
   };
+  
 
 
   return (

@@ -19,7 +19,6 @@ function Login() {
 
   const navigate = useNavigate();
 
-
   const valorInput = (e) =>
     setUsuario({ ...usuario, [e.target.name]: e.target.value });
 
@@ -34,8 +33,13 @@ function Login() {
       const response = await api.post("associate/login",
         usuario, // fixed to pass just the usuario object
       );
-      window.alert("passar esse alert pro bloco catch e impedir de logar em caso de erro")
-      navigate('/Home');
+      if(response.data == 200){
+        navigate('/Home');
+      }else{
+        console.log(response.data)
+        window.alert("Usuário não cadastrado!! Tente novamente ou faça login como administrador para cadastrar novo usuário");
+        navigate('/');
+      }
     } catch (error) {
       console.log(error);
     }
