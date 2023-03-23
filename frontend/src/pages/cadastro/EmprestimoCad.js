@@ -56,6 +56,7 @@ function EmprestimoCadastro() {
                 type="text"
                 value={loan.associateId} // changed to use usuario object
                 onChange={valorInput}
+                required
                 placeholder="Digite a id do associado: "
               />
             </label>
@@ -67,6 +68,7 @@ function EmprestimoCadastro() {
                 type="text"
                 value={loan.bookId} // changed to use usuario object
                 onChange={valorInput}
+                required
                 placeholder="Digite a id do livro: "
               />
             </label>
@@ -78,7 +80,8 @@ function EmprestimoCadastro() {
                 type="text"
                 value={loan.duration} // changed to use usuario object
                 onChange={valorInput}
-                placeholder="Digite a duração: "
+                required
+                placeholder="Digite a duração: (dias)"
               />
             </label>
             <label for="status">
@@ -89,29 +92,30 @@ function EmprestimoCadastro() {
                 type="text"
                 value={loan.status} // changed to use usuario object
                 onChange={valorInput}
+                required
                 placeholder="Digite a o status: "
               />
             </label>
             <label for="createat">
-              Data:
+              Data de criação:
               <input
                 className="input-cadastro"
                 name="createat"
                 type="date"
                 value={loan.createat} // changed to use usuario object
                 onChange={valorInput}
-                placeholder="Digite a duração: "
-              />
+                required
+               />
             </label>
             <label for="updateat">
-              Data:
+              Data de atualização:
               <input
                 className="input-cadastro"
                 name="updateat"
                 type="date"
                 value={loan.updateat} // changed to use usuario object
                 onChange={valorInput}
-                placeholder="Digite a duração: "
+                required
               />
             </label>
             <div class="container-cadastro-form-btn">

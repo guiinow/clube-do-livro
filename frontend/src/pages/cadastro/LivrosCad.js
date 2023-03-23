@@ -14,9 +14,9 @@ function LivrosCadastro() {
     publisher: "",
   });
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-console.log(livro)
+  console.log(livro)
 
   const valorInput = (e) =>
     setLivro({ ...livro, [e.target.name]: e.target.value });
@@ -29,7 +29,7 @@ console.log(livro)
       console.log(
         livro
       );
-      const response = await api.post("books", 
+      const response = await api.post("books",
         livro, // fixed to pass just the usuario object
       );
       window.alert("Livro cadastrado com sucesso!");
@@ -50,41 +50,46 @@ console.log(livro)
         <form onSubmit={handleSubmit} className="formulario">
           <div className="wrap-input-cadastro">
             <label for="title">Título:
-            <input
-              className="input-cadastro"
-              name="title"
-              type="text"
-              value={livro.title} // changed to use usuario object
-              onChange={valorInput}
-              placeholder="Digite o título: "
-            /></label>
+              <input
+                className="input-cadastro"
+                name="title"
+                type="text"
+                value={livro.title} // changed to use usuario object
+                onChange={valorInput}
+                required
+                placeholder="Digite o título: "
+              /></label>
             <label for="author">Autor:
-            <input
-              className="input-cadastro"
-              name="author"
-              type="text"
-              value={livro.author} // changed to use usuario object
-              onChange={valorInput}
-              placeholder="Digite o autor: "
-            /></label>
+              <input
+                className="input-cadastro"
+                name="author"
+                type="text"
+                value={livro.author} // changed to use usuario object
+                onChange={valorInput}
+                required
+                placeholder="Digite o autor: "
+              /></label>
             <label for="description">Descrição:
-            <input
-              className="input-cadastro"
-              name="description"
-              type= "text"
-              value={livro.description} // changed to use usuario object
-              onChange={valorInput}
-              placeholder="Digite a descrição: "
-            /></label>
+              <input
+                className="input-cadastro"
+                name="description"
+                type="text"
+                value={livro.description} // changed to use usuario object
+                onChange={valorInput}
+                maxlength="120"
+                required
+                placeholder="Digite a descrição: "
+              /></label>
             <label for="publisher">Editora:
-            <input
-              className="input-cadastro"
-              name="publisher"
-              type="text"
-              value={livro.publisher} // changed to use usuario object
-              onChange={valorInput}
-              placeholder="Digite a editora: "
-            /></label>
+              <input
+                className="input-cadastro"
+                name="publisher"
+                type="text"
+                value={livro.publisher} // changed to use usuario object
+                onChange={valorInput}
+                required
+                placeholder="Digite a editora: "
+              /></label>
             <div class="container-cadastro-form-btn">
               <button class="cadastro-form-btn" onSubmit={handleSubmit}>
                 Cadastrar

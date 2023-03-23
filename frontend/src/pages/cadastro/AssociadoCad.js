@@ -58,6 +58,7 @@ console.log(usuario)
               type="text"
               value={usuario.name} // changed to use usuario object
               onChange={valorInput}
+              required
               placeholder="Digite seu nome: "
             /></label>
             <label for="email">Email:
@@ -67,6 +68,7 @@ console.log(usuario)
               type="email"
               value={usuario.email} // changed to use usuario object
               onChange={valorInput}
+              required
               placeholder="Digite seu email: "
             /></label>
             <label for="phone">Telefone:
@@ -76,6 +78,7 @@ console.log(usuario)
               type="text"
               value={usuario.phone} // changed to use usuario object
               onChange={valorInput}
+              required
               placeholder="Digite seu telefone: "
             /></label>
             <label for="address">Endereço:
@@ -85,6 +88,8 @@ console.log(usuario)
               type="text"
               value={usuario.address} // changed to use usuario object
               onChange={valorInput}
+              maxlength="50"
+              required
               placeholder="Digite seu endereço: "
             /></label>
             <label for="password">Senha de acesso:
@@ -94,6 +99,7 @@ console.log(usuario)
               type="text"
               value={usuario.password} // changed to use usuario object
               onChange={valorInput}
+              required
               placeholder="Digite sua senha: "
             /></label>
             <div class="container-cadastro-form-btn">

@@ -73,6 +73,11 @@ function Emprestimo() {
     });
   }, []);
 
+  // function DateFormat(data) {
+  //   return ((data.getDate())) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear()
+  // }
+
+
   return (
     <div class="Container">
       <Navbar />

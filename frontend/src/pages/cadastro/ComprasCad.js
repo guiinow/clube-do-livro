@@ -54,6 +54,8 @@ console.log(compra)
               type="text"
               value={compra.price} // changed to use usuario object
               onChange={valorInput}
+              
+              required
               placeholder="Digite o preço: "
             /></label>
             <label for="date">Data:
@@ -63,6 +65,7 @@ console.log(compra)
               type="date"
               value={compra.date} // changed to use usuario object
               onChange={valorInput}
+              required
               placeholder="Digite a data: "            
             /></label>
             <div class="container-cadastro-form-btn">
