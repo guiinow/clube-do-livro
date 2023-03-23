@@ -2,6 +2,8 @@ import cadastro from "../cadastro/cadastro.css";
 import Navbar from "../../components/Navbar";
 import { useState } from "react";
 import { api } from "../../service/api";
+import { useNavigate } from "react-router-dom";
+
 
 function ComprasCadastro() {
 
@@ -9,6 +11,8 @@ function ComprasCadastro() {
     price: "",
     date: "",
   });
+  const navigate = useNavigate();
+
 
 console.log(compra)
 
@@ -26,6 +30,8 @@ console.log(compra)
       const response = await api.post("buy", 
         compra, // fixed to pass just the usuario object
       );
+      window.alert("Compra cadastrado com sucesso!");
+      navigate("/Compras");
     } catch (error) {
       console.log(error);
     }
@@ -48,6 +54,8 @@ console.log(compra)
               type="text"
               value={compra.price} // changed to use usuario object
               onChange={valorInput}
+              
+              required
               placeholder="Digite o preço: "
             /></label>
             <label for="date">Data:
@@ -57,6 +65,7 @@ console.log(compra)
               type="date"
               value={compra.date} // changed to use usuario object
               onChange={valorInput}
+              required
               placeholder="Digite a data: "            
             /></label>
             <div class="container-cadastro-form-btn">

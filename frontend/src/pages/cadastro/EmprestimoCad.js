@@ -2,17 +2,21 @@ import cadastro from "../cadastro/cadastro.css";
 import Navbar from "../../components/Navbar";
 import { useState } from "react";
 import { api } from "../../service/api";
+import { useNavigate } from "react-router-dom";
 
 function EmprestimoCadastro() {
-
   const [loan, setLoan] = useState({
-    associateid: "",
-    bookid: "",
+    associateId: "",
+    bookId: "",
     duration: "",
+    status: "",
     createat: "",
+    updateat: "",
   });
 
-console.log(loan)
+  console.log(loan);
+
+  const navigate = useNavigate();
 
   const valorInput = (e) =>
     setLoan({ ...loan, [e.target.name]: e.target.value });
@@ -22,18 +26,17 @@ console.log(loan)
     e.preventDefault();
 
     try {
-      console.log(
-        loan
+      console.log(loan);
+      const response = await api.post(
+        "loan",
+        loan // fixed to pass just the usuario object
       );
-      const response = await api.post("loan", 
-        loan, // fixed to pass just the usuario object
-      );
+      window.alert("Emprestimo cadastrado com sucesso!");
+      navigate("/Emprestimo");
     } catch (error) {
       console.log(error);
     }
   };
-
-  
 
   return (
     <div className="container">
@@ -45,42 +48,76 @@ console.log(loan)
       <div className="container-cadastro">
         <form onSubmit={handleSubmit} className="formulario">
           <div className="wrap-input-cadastro">
-            <label for="associateid">Id Associado:
-            <input
-              className="input-cadastro"
-              name="associateid"
-              type="text"
-              value={loan.associateid} // changed to use usuario object
-              onChange={valorInput}
-              placeholder="Digite a id do livro: "
-            /></label>
-            <label for="bookid">Id Livro:
-            <input
-              className="input-cadastro"
-              name="bookid"
-              type="text"
-              value={loan.bookid} // changed to use usuario object
-              onChange={valorInput}
-              placeholder="Digite a id do livro: "
-            /></label>
-            <label for="duration">Duração:
-            <input
-              className="input-cadastro"
-              name="duration"
-              type="text"
-              value={loan.duration} // changed to use usuario object
-              onChange={valorInput}
-              placeholder="Digite a duração: "
-            /></label>
-            <label for="createat">Data:
-            <input
-              className="input-cadastro"
-              name="createat"
-              type="date"
-              value={loan.createat} // changed to use usuario object
-              onChange={valorInput}
-              placeholder="Digite a duração: "
-            /></label>
+            <label for="associateId">
+              Id Associado:
+              <input
+                className="input-cadastro"
+                name="associateId"
+                type="text"
+                value={loan.associateId} // changed to use usuario object
+                onChange={valorInput}
+                required
+                placeholder="Digite a id do associado: "
+              />
+            </label>
+            <label for="bookId">
+              Id Livro:
+              <input
+                className="input-cadastro"
+                name="bookId"
+                type="text"
+                value={loan.bookId} // changed to use usuario object
+                onChange={valorInput}
+                required
+                placeholder="Digite a id do livro: "
+              />
+            </label>
+            <label for="duration">
+              Duração:
+              <input
+                className="input-cadastro"
+                name="duration"
+                type="text"
+                value={loan.duration} // changed to use usuario object
+                onChange={valorInput}
+                required
+                placeholder="Digite a duração: (dias)"
+              />
+            </label>
+            <label for="status">
+              Status:
+              <input
+                className="input-cadastro"
+                name="status"
+                type="text"
+                value={loan.status} // changed to use usuario object
+                onChange={valorInput}
+                required
+                placeholder="Digite a o status: "
+              />
+            </label>
+            <label for="createat">
+              Data de criação:
+              <input
+                className="input-cadastro"
+                name="createat"
+                type="date"
+                value={loan.createat} // changed to use usuario object
+                onChange={valorInput}
+                required
+               />
+            </label>
+            <label for="updateat">
+              Data de atualização:
+              <input
+                className="input-cadastro"
+                name="updateat"
+                type="date"
+                value={loan.updateat} // changed to use usuario object
+                onChange={valorInput}
+                required
+              />
+            </label>
             <div class="container-cadastro-form-btn">
               <button class="cadastro-form-btn" onSubmit={handleSubmit}>
                 Cadastrar

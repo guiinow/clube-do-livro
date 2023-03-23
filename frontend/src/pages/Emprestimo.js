@@ -68,10 +68,15 @@ function Emprestimo() {
   };
 
   useEffect(() => {
-    api.get("loan").then(response => {
+    api.get("loan").then((response) => {
       setEmprestimo(response.data);
     });
-  }, [])
+  }, []);
+
+  // function DateFormat(data) {
+  //   return ((data.getDate())) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear()
+  // }
+
 
   return (
     <div class="Container">

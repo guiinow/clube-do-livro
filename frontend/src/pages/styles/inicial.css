@@ -66,7 +66,7 @@
     width: 100%;
     background-color: #fff;
     height: 100vh;
-    /* background-image: url(); */
+    /* background-image: url(); */;
 
     opacity: 0.7;
 
@@ -76,6 +76,8 @@
 .tabela{
     margin: 50px;
     font-size: 50px;
+    /* padding: 0 50px; */
+    /* max-width: 1340px; */
 }
 
 .botao-div{
