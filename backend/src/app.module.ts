@@ -12,8 +12,15 @@ import { LoanModule } from './modules/loan/loan.module';
 import { LoanService } from './modules/loan/loan.service';
 
 @Module({
-  imports: [AppModule,BuyModule, LoanModule, AssociateModule, BooksModule],
+  imports: [AppModule, BuyModule, LoanModule, AssociateModule, BooksModule],
   controllers: [AppController],
-  providers: [AppService, AssociateService, BooksService, BuyService, LoanService, ...databaseProviders],
+  providers: [
+    AppService,
+    AssociateService,
+    BooksService,
+    BuyService,
+    LoanService,
+    ...databaseProviders,
+  ],
 })
 export class AppModule {}
