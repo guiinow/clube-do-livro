@@ -49,7 +49,7 @@ describe('BooksController', () => {
           useValue: {
             create: jest.fn().mockResolvedValue(newBookEntity),
             findAll: jest.fn().mockResolvedValue(booksEntityList),
-            findOne: jest.fn(),
+            findOne: jest.fn().mockResolvedValue(newBookEntity),
             update: jest.fn(),
             remove: jest.fn(),
           },
@@ -115,4 +115,24 @@ describe('BooksController', () => {
       expect(booksController.create(newBookEntity)).rejects.toThrow();
     });
   });
+
+  describe('findOne', () => {
+    it('should return a book, given the id', async () => {
+      // arrange
+
+      // act
+      const result = await booksController.findOne(1);
+
+      // assert
+      expect(result).toEqual(newBookEntity);
+      expect(typeof result).toEqual(typeof newBookEntity);
+    });
+    it('should throw an error', () => {
+      // arrange
+      jest.spyOn(booksService, 'findOne').mockRejectedValueOnce(new Error());
+
+      // assert
+      expect(booksController.findOne(1)).rejects.toThrow();
+    })
+  })
 });
