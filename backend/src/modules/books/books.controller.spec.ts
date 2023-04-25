@@ -50,8 +50,8 @@ describe('BooksController', () => {
             create: jest.fn().mockResolvedValue(newBookEntity),
             findAll: jest.fn().mockResolvedValue(booksEntityList),
             findOne: jest.fn().mockResolvedValue(newBookEntity),
-            update: jest.fn(),
-            remove: jest.fn(),
+            update: jest.fn().mockResolvedValue(newBookEntity),
+            remove: jest.fn().mockResolvedValue(newBookEntity),
           },
         },
         ...databaseProviders,
@@ -112,7 +112,7 @@ describe('BooksController', () => {
       jest.spyOn(booksService, 'create').mockRejectedValueOnce(new Error());
 
       // assert
-      expect(booksController.create(newBookEntity)).rejects.toThrow();
+     expect(booksController.create(newBookEntity)).rejects.toThrow();
     });
   });
 
@@ -135,4 +135,46 @@ describe('BooksController', () => {
       expect(booksController.findOne(1)).rejects.toThrow();
     })
   })
+
+  describe('update', () => {
+    it('should update a book, given the id', async () => {
+      // arrange
+      // act
+
+      const result = await booksController.update(1, newBookEntity);
+
+      // assert
+      expect(result).toEqual(newBookEntity);
+      expect(booksService.update).toHaveBeenCalledTimes(1);
+      expect(booksService.update).toHaveBeenCalledWith(1, newBookEntity);
+
+    })
+
+    it('shoud throw and error', () => { 
+      // arrange
+
+      // act
+      jest.spyOn(booksService, 'update').mockRejectedValueOnce(new Error());
+
+      // assert
+      expect(booksController.update(1, newBookEntity)).rejects.toThrow();
+    })
+  });
+
+  describe('remove', () => { 
+    it('should remove a book, given the id', async () => { 
+
+      // arrange
+
+      // act
+      const result = await booksController.remove(1);
+
+      // assert
+      expect(result).toEqual(newBookEntity);
+      expect(booksService.remove).toHaveBeenCalledTimes(1);
+      expect(booksService.remove).toHaveBeenCalledWith(1);
+      
+    })
+  })
+  
 });
