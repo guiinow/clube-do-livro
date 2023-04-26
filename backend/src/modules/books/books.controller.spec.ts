@@ -67,25 +67,6 @@ describe('BooksController', () => {
     expect(booksService).toBeDefined();
   });
 
-  describe('findAll', () => {
-    it('should return a list books', async () => {
-      // act
-      const result = await booksController.findAll();
-      // assert
-      expect(result).toEqual(booksEntityList);
-      expect(typeof result).toEqual('object');
-      expect(booksService.findAll).toHaveBeenCalledTimes(1);
-    });
-
-    it('should throw an exception', () => {
-      //  arrange
-      jest.spyOn(booksService, 'findAll').mockRejectedValueOnce(new Error());
-
-      // assert
-      expect(booksController.findAll()).rejects.toThrow();
-    });
-  });
-
   describe('create', () => {
     it('should create a new book', async () => {
       // arrange
@@ -115,6 +96,26 @@ describe('BooksController', () => {
      expect(booksController.create(newBookEntity)).rejects.toThrow();
     });
   });
+  
+  describe('findAll', () => {
+    it('should return a list books', async () => {
+      // act
+      const result = await booksController.findAll();
+      // assert
+      expect(result).toEqual(booksEntityList);
+      expect(typeof result).toEqual('object');
+      expect(booksService.findAll).toHaveBeenCalledTimes(1);
+    });
+
+    it('should throw an exception', () => {
+      //  arrange
+      jest.spyOn(booksService, 'findAll').mockRejectedValueOnce(new Error());
+
+      // assert
+      expect(booksController.findAll()).rejects.toThrow();
+    });
+  });
+
 
   describe('findOne', () => {
     it('should return a book, given the id', async () => {
